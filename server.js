@@ -11,15 +11,15 @@ app.use(express.static("public"));  // Staticly serve pages, using directory 'pu
 
 // User connects to server
 app.get("/", function(req, res) {
-	// Will serve static pages, no need to handle requests
+  // Will serve static pages, no need to handle requests
 });
 
 // If any page not handled already handled (ie. doesn't exists)
 app.get("*", function(req, res) {
-	res.status(404).send("Error 404 - Page not found");
+  res.status(404).send("Error 404 - Page not found");
 });
 
 // Start http server
 http.listen(app.get("port"), function() {
-	console.log("Node app started on port %s", app.get("port"));
+  console.log("Node app started on port %s", app.get("port"));
 });

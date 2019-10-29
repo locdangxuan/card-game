@@ -1,12 +1,12 @@
 // This file manages the games client's logic. It's here that Socket.io connections are handled
 // and functions from canvas.js are used to manage the game's visual appearance.
 
-var socket = io();
-var canPlayCard = false;
-var logFull = false;
-var playerPoints = [],
+let socket = io();
+let canPlayCard = false;
+let logFull = false;
+let playerPoints = [],
 	opponentPoints = [];
-var opponentCard, playerCard, matchWinner, matchEndReason, readyToEnd, timerInterval;
+let opponentCard, playerCard, matchWinner, matchEndReason, readyToEnd, timerInterval;
 
 //////////  Socket Events  \\\\\\\\\\
 socket.on("enter match", function() {
@@ -75,7 +75,7 @@ function enterMatch() {
 
 function updateCards(cards) {
 	if (logFull) console.log("%s(%s)", arguments.callee.name, Array.prototype.slice.call(arguments).sort());
-	for (var i = 0; i < cards.length; i++) {
+	for (let i = 0; i < cards.length; i++) {
 		handSlots[i].card = cards[i];
 	}
 	canPlayCard = true;
@@ -96,8 +96,8 @@ function unknownCardPlayed() {
 
 function displayResult(result) {
 	if (logFull) console.log("%s(%s)", arguments.callee.name, Array.prototype.slice.call(arguments).sort());
-	var player = undefined;
-	var opponent = undefined;
+	let player = undefined;
+	let opponent = undefined;
 	if (result.winner.socketId === socket.id) {
 		player = result.winner;
 		opponent = result.loser;
@@ -131,16 +131,16 @@ function endMatch() {
 	opponentCard = undefined;
 	playerCard = undefined;
 	displayCardSlots = false;
-	for (var i = 0; i < handSlots.length; i++) {
+	for (let i = 0; i < handSlots.length; i++) {
 		handSlots[i].card = undefined;
 	}
 
 	if (matchEndReason === "player left") {
-		var reason = ["Your opponent", "You"][+(socket.id !== matchWinner)] + " left the match";
+		let reason = ["Your opponent", "You"][+(socket.id !== matchWinner)] + " left the match";
 		labels["rematch"].disabled = true;
 		labels["rematch"].clickable = false;
 	} else {
-		var reason = ["Your opponent has", "You have"][+(socket.id === matchWinner)] + " a full set";
+		let reason = ["Your opponent has", "You have"][+(socket.id === matchWinner)] + " a full set";
 		labels["rematch"].clickable = true;
 	}
 
@@ -183,8 +183,8 @@ function requestRematch() {
 }
 
 function animateLabels() {
-	var dotLabels = [labels["waiting"], labels["searching"]];
-	for (var i = 0; i < dotLabels.length; i++) {
+	let dotLabels = [labels["waiting"], labels["searching"]];
+	for (let i = 0; i < dotLabels.length; i++) {
 		if (dotLabels[i].visible) {
 			updateDots(dotLabels[i]);
 		}
@@ -192,8 +192,8 @@ function animateLabels() {
 }
 
 function updateDots(label) {
-	var dots = label.text.split(".").length - 1;
-	var newDots = ((dots + 1) % 4);
+	let dots = label.text.split(".").length - 1;
+	let newDots = ((dots + 1) % 4);
 	label.text = label.text.slice(0, -3) + Array(newDots + 1).join(".") + Array(3 - newDots + 1).join(" ");
 }
 

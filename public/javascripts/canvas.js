@@ -23,7 +23,7 @@ function init() {
 	ctx = canvas.getContext("2d");
 	handleResize();
 	handSlots = [];
-	for (var i = 1; i < 6; i++) {
+	for (let i = 1; i < 6; i++) {
 		handSlots.push({
 			position: {
 				x: canvas.width / 6 * i - cardWidth / 2,
@@ -49,7 +49,7 @@ function animate() {
 
 //////////  Events  \\\\\\\\\\
 function handleMouseMove(event) {
-	for (var i = 0; i < handSlots.length; i++) {
+	for (let i = 0; i < handSlots.length; i++) {
 		if (isOnSlot(event, handSlots[i])) {
 			if (!clickCursor) {
 				$("#game-canvas").css("cursor", "pointer");
@@ -97,7 +97,7 @@ function handleMouseUp(event) {
 	}
 
 
-	for (var i = 0; i < handSlots.length; i++) {
+	for (let i = 0; i < handSlots.length; i++) {
 		if (isOnSlot(event, handSlots[i])) {
 			playCard(i);
 			playerCard = handSlots[i].card;
@@ -109,7 +109,7 @@ function handleMouseUp(event) {
 }
 
 function isOnSlot(event, slot) {
-	var x = (event.pageX - canvas.offsetLeft),
+	let x = (event.pageX - canvas.offsetLeft),
 		y = (event.pageY - canvas.offsetTop);
 	if (slot.card && canPlayCard) {
 		if (x > slot.position.x && x < slot.position.x + cardWidth &&
@@ -121,15 +121,15 @@ function isOnSlot(event, slot) {
 }
 
 function isOnLabel(event, label) {
-	var x = (event.pageX - canvas.offsetLeft),
+	let x = (event.pageX - canvas.offsetLeft),
 		y = (event.pageY - canvas.offsetTop);
 	if (label.clickable) {
-		var labelWidth = label.text.length * label.size * r * 0.4;
-		var labelHeight = label.size * r;
-		var leftBoundary = label.position.x * canvas.width - labelWidth / 2;
-		var rightBoundary = label.position.x * canvas.width + labelWidth / 2;
-		var upperBoundary = label.position.y * canvas.height - labelHeight / 2;
-		var lowerBoundary = label.position.y * canvas.height + labelHeight / 2;
+		let labelWidth = label.text.length * label.size * r * 0.4;
+		let labelHeight = label.size * r;
+		let leftBoundary = label.position.x * canvas.width - labelWidth / 2;
+		let rightBoundary = label.position.x * canvas.width + labelWidth / 2;
+		let upperBoundary = label.position.y * canvas.height - labelHeight / 2;
+		let lowerBoundary = label.position.y * canvas.height + labelHeight / 2;
 
 		if (x > leftBoundary && x < rightBoundary &&
 			y > upperBoundary && y < lowerBoundary) {
@@ -153,7 +153,7 @@ function handleResize() {
 	cardWidth = 120 * r;
 	cardHeight = cardWidth * 1.5;
 	if (handSlots) {
-		for (var i = 1; i < 6; i++) {
+		for (let i = 1; i < 6; i++) {
 			handSlots[i-1].position = {
 				x: canvas.width / 6 * i - cardWidth / 2,
 				y: canvas.height - cardHeight * 1.1
@@ -167,7 +167,7 @@ function handleResize() {
 //////////  Drawing  \\\\\\\\\\
 function draw() {
 	ctx.clearRect(0, 0, canvas.width, canvas.height);
-	for (var i = 0; i < handSlots.length; i++) {
+	for (let i = 0; i < handSlots.length; i++) {
 		if (displayCardSlots) {
 			if (handSlots[i].card) {
 				drawCard(handSlots[i].card, handSlots[i].position, 1);
@@ -260,14 +260,14 @@ function drawEmptySlot(slot) {
 }
 
 function drawPoints() {
-	for (var i = 0; i < playerPoints.length; i++) {
-		for (var j = playerPoints[i].length - 1; j >= 0; j--) {
+	for (let i = 0; i < playerPoints.length; i++) {
+		for (let j = playerPoints[i].length - 1; j >= 0; j--) {
 			drawPointCard(playerPoints[i][j], {x: cardWidth * 0.55 * i + 10 * r, y: cardHeight * 0.5 * j * 0.2 + 10 * r}, 0.5);
 		}
 	}
 
-	for (var i = 0; i < opponentPoints.length; i++) {
-		for (var j = opponentPoints[i].length - 1; j >= 0; j--) {
+	for (let i = 0; i < opponentPoints.length; i++) {
+		for (let j = opponentPoints[i].length - 1; j >= 0; j--) {
 			drawPointCard(opponentPoints[i][j], {x: canvas.width - cardWidth * 0.55 * (3-i) - 5 * r, y: cardHeight * 0.5 * j * 0.2 + 10 * r}, 0.5);
 		}
 	}
@@ -277,7 +277,7 @@ function drawLabel(label) {
 	ctx.textBaseline = "middle";
 	ctx.textAlign = "center";
 	ctx.font = (label.size * r) + "px " + label.font;
-	var shadowDistance = label.size / 30;
+	let shadowDistance = label.size / 30;
 	if (!label.disabled) {
 		ctx.fillStyle = "#9a9a9a";
 		ctx.fillText(label.text, canvas.width * label.position.x + (shadowDistance * r), canvas.height * label.position.y + (shadowDistance * r));
@@ -304,15 +304,15 @@ window.requestAnimFrame = (function () {
 		   };
 })();
 
-var handSlots, canvas, ctx, horizontalCenter, verticalCenter, clickPos, clickedCard, cardWidth, cardHeight, playerCardPosition, opponentCardPosition;
-var clickCursor = false,
+let handSlots, canvas, ctx, horizontalCenter, verticalCenter, clickPos, clickedCard, cardWidth, cardHeight, playerCardPosition, opponentCardPosition;
+let clickCursor = false,
 	displayCardSlots = false,
 	aspect = 16 / 10,
 	labels = [],
 	labelFont = "RagingRedLotusBB";
-var typeColors = ["#FF8B26", "#1260E6", "#74D5F2"];
-var types = ["Fire", "Water", "Ice"];
-var colors = {"yellow": "#fdee00", "orange": "#ffb235", "green": "#52a546", "blue": "#246acd", "red": "#e02929", "purple": "#9738af"};
+let typeColors = ["#FF8B26", "#1260E6", "#74D5F2"];
+let types = ["Fire", "Water", "Ice"];
+let colors = {"yellow": "#fdee00", "orange": "#ffb235", "green": "#52a546", "blue": "#246acd", "red": "#e02929", "purple": "#9738af"};
 
 init();
 animate();
