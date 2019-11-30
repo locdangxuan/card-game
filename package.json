@@ -5,10 +5,15 @@
   "version": "0.1.0",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js"
+    "start-dev": "nodemon server.js",
+    "start": "node sever.js" 
   },
   "dependencies": {
     "express": "^4.13.4",
+    "pug": "^2.0.4",
     "socket.io": "^1.4.4"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.1"
   }
 }
