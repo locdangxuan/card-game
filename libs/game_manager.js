@@ -7,7 +7,7 @@ var queue = [];
 var matches = [];
 var rematchRequests = [];
 
-var powers = [10, 8, 7, 6, 5, 5, 4, 3, 3, 2];
+var powers = [9, 8, 7, 6, 5, 5, 4, 3, 3, 2, 1];
 var colors = ["yellow", "orange", "green", "blue", "red", "purple"];
 
 var logFull = false;
