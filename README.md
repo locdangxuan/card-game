@@ -1,4 +1,4 @@
-# Card Fu
+<!-- # Card Fu
 An online multiplayer game based on Club Penguin's Card-Jitsu minigame.
 Built with Node.js and Socket.io.
 
@@ -11,3 +11,4 @@ Card Fu is a simple strategy card game based on the Card-Jitsu minigame in Club 
 * Know your enemy! The key to winning a game of Card Fu is knowing what your opponent is likely to play. Always keep an eye out for what type of card your opponent needs to win, or what strategy they are using.
 * Counter counter plays! Before you play the perfect counter to your opponents winning move, take a moment to think about the fact that your opponent might very well expect you to do this, and have a play to counter your counterplay planned. They may even have foreseen your triple-counter!
 * Don't overthink it! When you're sitting there, wondering whether your opponent is tripple-bluffing or even quadruple-bluffing, it might good idea to just choose the obvious play.
+ -->
